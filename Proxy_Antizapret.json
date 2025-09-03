@@ -6,7 +6,7 @@
     "action": "route",
     "outbound": "proxy",
     "rule_set": [
-        "https://krasovs.ky/sing-box/antizapret.srs"
+        "https://github.com/savely-krasovsky/antizapret-sing-box/releases/latest/download/antizapret.srs"
     ]
 }
 ]
