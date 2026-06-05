@@ -17,6 +17,12 @@ jobs:
       - name: Update rule-set branch
         run: |
           ./ruleset_gen
+          # Reformat the std::map header into a sorted, constant-initialized
+          # std::array (one read-only copy instead of one heap copy per TU).
+          python3 format_srslist.py srslist.h
+          # Refuse to publish a header that would break every downstream build.
+          printf '#include "srslist.h"\nint main(){ return (int)ruleSetList.size(); }\n' > srslist_check.cpp
+          g++ -std=c++20 -fsyntax-only -I. srslist_check.cpp && rm srslist_check.cpp
           mkdir -p rule-set
           cd rule-set
           git init
